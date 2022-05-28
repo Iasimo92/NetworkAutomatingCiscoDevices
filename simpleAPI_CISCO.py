@@ -1,0 +1,21 @@
+import pexpect
+import sys
+child = pexpect.spawn('ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -c aes128-cbc 192.168.1.16 -l iasonas')
+child.logfile=sys.stdout.buffer
+child.expect('Password:')
+child.sendline('ericsson')
+child.expect('R1>')
+child.sendline('enable')
+child.expect('Password:')
+child.sendline('ericsson')
+child.expect('R1#')
+child.sendline('terminal length 0')
+child.expect('R1#')
+child.sendline('show running-config')
+child.expect('R1#')
+child.sendline('show version')
+child.expect('R1#')
+child.sendline('show ip interface brief')
+child.expect('R1#')
+child.sendline('show tech-support')
+child.expect('R1#')
